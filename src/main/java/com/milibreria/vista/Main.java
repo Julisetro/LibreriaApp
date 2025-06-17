@@ -1,13 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.milibreria.vista;
 
-/**
- *
- * @author Julian
- */
+import com.milibreria.controlador.UsuarioDAO;
+import com.milibreria.modelo.Usuario;
+import java.util.List;
+
 public class Main {
-    
+    public static void main(String[] args) {
+        UsuarioDAO dao = new UsuarioDAO();
+        List<Usuario> usuarios = dao.listar();
+
+        for (Usuario u : usuarios) {
+            System.out.println(u.getId() + " " + u.getNombre() + " " + u.getCorreo());
+        }
+    }
 }
+

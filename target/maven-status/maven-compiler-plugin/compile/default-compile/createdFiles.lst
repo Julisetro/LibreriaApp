@@ -1,1 +1,5 @@
+com\milibreria\modelo\Usuario.class
+com\milibreria\util\Conexion.class
+com\milibreria\vista\Main.class
 com\mycompany\libreriaapp\LibreriaApp.class
+com\milibreria\controlador\UsuarioDAO.class
