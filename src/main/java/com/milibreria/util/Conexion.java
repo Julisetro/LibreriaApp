@@ -2,6 +2,7 @@ package com.milibreria.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Conexion {
     private static final String URL = "jdbc:mysql://localhost:3306/usuarios";
@@ -11,7 +12,7 @@ public class Conexion {
     public static Connection conectar() {
     try {
         return DriverManager.getConnection(URL, USER, PASS);
-    } catch (Exception e) {
+    } catch (SQLException e) {
         System.out.println("Error de conexión:" + e.getMessage());
         return null;
         }
