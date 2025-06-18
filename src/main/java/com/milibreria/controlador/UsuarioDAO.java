@@ -26,5 +26,27 @@ public class UsuarioDAO {
         }
         return lista;
     }
+    
+    /**
+     * Actualiza el resgistro de un usuario en la BD.
+     * @param u Objeto Usuario ya modificado (id, nombre, correo).
+     * @throws java.sql.SQLException Si algo falla en la operación SQL.
+     */
+    
+    public void actualizar(Usuario u) throws SQLException {
+        String sql = 
+                "UPDATE usuarios SET nombre = ?, correo = ? WHERE id = ?";
+        try (Connection con = Conexion.conectar();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, u.getNombre());
+            ps.setString(2, u.getCorreo());
+            ps.setInt(3, u.getId());
+            
+            int filas = ps.executeUpdate();
+            System.out.println("Filas afectadas: " + filas);
+        }
+    }
 }
+
+
 
