@@ -79,7 +79,18 @@ public class Main {
     
         /* ------------- PENDIENTE: CREATE ------------- */
     private static void insertarUsuario() {
-        System.out.println("Funcionalidad de inserción aún no implementada.\n");
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine().trim();
+        System.out.print("Correo: ");
+        String correo = sc.nextLine().trim();
+        
+        Usuario u = new Usuario(0, nombre, correo);
+        int id = dao.crearUsuario(u);
+        if (id != -1){
+            System.out.println("Usuario creado con id = "  + id);
+        } else {
+            System.out.println ("No se pudo crear el usuario.");
+        }
     }
 
     /* ------------- PENDIENTE: DELETE ------------- */
