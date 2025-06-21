@@ -81,6 +81,33 @@ public class UsuarioDAO {
             return -1;
         }
     }
+    
+    /**
+     * Elimina un usuario por su id.
+     *
+     * @param id Clave primaria del usuario que se quiere borrar.
+     * @return   true  → se borró al menos 1 fila.  
+     *           false → no existía ese id o hubo error.
+     */
+    public boolean eliminarUsuario(int id) {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        try (Connection con = Conexion.conectar();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int filas = ps.executeUpdate();
+            
+            if (filas > 0) {
+                System.out.println("Usuario con id = " + id + " eliminado.");
+                return true;
+            } else {
+                System.out.println("No se encontro usuario con id = " + id);
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar: " + e.getMessage());
+            return false;
+        }     
+    }
 }
 
 

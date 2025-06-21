@@ -37,9 +37,9 @@ public class Main {
         System.out.println("""
                            ====== MENÚ CRUD USUARIOS ======
                            1. Listar usuarios
-                           2. Insertar usuario   (pendiente)
+                           2. Insertar usuario
                            3. Actualizar usuario
-                           4. Eliminar usuario   (pendiente)
+                           4. Eliminar usuario
                            0. Salir
                            """);
     }
@@ -77,7 +77,7 @@ public class Main {
         }
     }
     
-        /* ------------- PENDIENTE: CREATE ------------- */
+
     private static void insertarUsuario() {
         System.out.print("Nombre: ");
         String nombre = sc.nextLine().trim();
@@ -93,8 +93,17 @@ public class Main {
         }
     }
 
-    /* ------------- PENDIENTE: DELETE ------------- */
+
     private static void eliminarUsuario() {
-        System.out.println("Funcionalidad de eliminación aún no implementada.\n");
+        System.out.print("Id a eliminar: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        
+        boolean ok = dao.eliminarUsuario(id);
+        if (ok) {
+            System.out.println("Eliminación exitosa.");
+        } else {
+            System.out.println("No se pudo eliminar.");
+        }
     }    
 }
