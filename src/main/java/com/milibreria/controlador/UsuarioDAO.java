@@ -46,6 +46,41 @@ public class UsuarioDAO {
             System.out.println("Filas afectadas: " + filas);
         }
     }
+    
+    /**
+     * Inserta un nuevo usuario en la tabla 'usuarios'.
+     *
+     * @param u Objeto Usuario con nombre y correo (id se ignora porque es AUTO_INCREMENT).
+     * @return  El id generado por la BD o -1 si algo salió mal.
+     */
+    public int crearUsuario(Usuario u){
+        String sql = "INSERT INTO usuarios (nombre, correo) VALUES (?,?)";
+        try (Connection con = Conexion.conectar();
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, u.getNombre());
+            ps.setString(2, u.getCorreo());
+            
+            int filasAfectadas = ps.executeUpdate();
+            
+            if (filasAfectadas ==0) {
+                System.out.println("No se inserto ningun registro.");
+                return -1;
+            }
+            
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int idGenerado = rs.getInt(1);
+                    u.setId(idGenerado);
+                    return idGenerado;
+                } else {
+                    return -1;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al insertar usuarios: " + e.getMessage());
+            return -1;
+        }
+    }
 }
 
 
